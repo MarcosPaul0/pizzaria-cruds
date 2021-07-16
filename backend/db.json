@@ -1,0 +1,23 @@
+{
+  "employees": [
+    {
+      "name": "Marcos Paulo",
+      "cpf": "12345679810",
+      "birth": "2001-03-07",
+      "admission": "2021-07-14",
+      "id": 1
+    },
+    {
+      "name": "Pereira",
+      "cpf": "12345678095",
+      "birth": "2002-03-07",
+      "admission": "2020-06-20",
+      "id": 3
+    }
+  ],
+  "pizzas": [],
+  "accompaniments": [],
+  "combos": [],
+  "sales": [],
+  "payments": []
+}
