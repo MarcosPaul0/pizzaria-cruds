@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export function useDataCrud(dataModel, baseUrl) {
+export function useDataDelete(dataModel, baseUrl) {
     const [data, setData] = useState(dataModel)
 
     useEffect(() => {
