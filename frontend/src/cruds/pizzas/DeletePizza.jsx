@@ -12,8 +12,8 @@ export function DeletePizza(props) {
     const history = useHistory()
 
     const pizza = useDataDelete({
-        code: '',
         type: '',
+        size: '',
         description: '',
         price: ''
     }, baseUrl)
@@ -22,10 +22,10 @@ export function DeletePizza(props) {
         <main className="main bg-yellow-100 flex flex-col items-center">
             <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
                 <div className="p-8">
-                    <FormInput id="code" name="code" type="text" label="Código" value={pizza.code} disabled />
-                    <FormInput id="type" name="type" type="text" label="Tipo" value={pizza.type} disabled />
-                    <FormTextArea id="description" name="description" type="text" label="Descrição" value={pizza.description} disabled />
-                    <FormInput id="price" name="price" type="text" label="Preço" value={pizza.price} disabled />
+                    <FormInput id="type" name="type" type="text" label="Tipo" value={pizza.type} disabled/>
+                    <FormInput id="code" name="code" type="text" label="Código" value={pizza.size} disabled/>
+                    <FormTextArea id="description" name="description" type="text" label="Descrição" value={pizza.description} disabled/>
+                    <FormInput id="price" name="price" type="text" label="Preço (R$)" placeholder="0,00" value={pizza.price} disabled/>
                     <div className="mt-4 flex justify-center">
                         <Button color="red" onClick={() => deleteData(baseUrl, backUrl, history)}>
                             Excluir

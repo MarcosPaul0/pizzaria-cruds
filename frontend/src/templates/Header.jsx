@@ -21,8 +21,8 @@ export function Header(props) {
     }
 
     return (
-        <header className="header bg-red-700 flex flex-row">
-            <img src={ PizzaIgm } alt="pizza" className="h-24 w-24 ml-12 mt-2" />
+        <header className="header bg-gradient-to-r from-red-900 via-red-600 to-red-900 flex flex-row">
+            <img src={ PizzaIgm } alt="pizza" className="h-32 w-32 ml-8 z-10 mt-2" />
             <div className="ml-14 text-white">
                 <h1 className="text-4xl">Pizzaria Nome</h1>
                 <p className="text-xl ml-40" >&gt; {page}</p>

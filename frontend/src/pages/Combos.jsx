@@ -48,7 +48,7 @@ export function Combos() {
                     </tbody>
                 </table>
             </div>
-            <ButtonLink to={`/combos/add`} color="yellow">Adicionar nova combo</ButtonLink>
+            <ButtonLink to={`/combos/add`} color="yellow">Novo combo</ButtonLink>
         </main>
     )
 }

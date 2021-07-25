@@ -48,7 +48,7 @@ export function Accompaniments() {
                     </tbody>
                 </table>
             </div>
-            <ButtonLink to={`/accompaniments/add`} color="yellow">Adicionar nova acompanhamento</ButtonLink>
+            <ButtonLink to={`/accompaniments/add`} color="yellow">Novo acompanhamento</ButtonLink>
         </main>
     )
 }

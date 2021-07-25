@@ -27,9 +27,9 @@ export function AddEmployee() {
         <main className="main bg-yellow-100 flex flex-col items-center">
             <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
                 <div className="p-8">
-                    <FormInput id="name" name="name" type="text" label="Nome" value={employee.name}
+                    <FormInput id="name" name="name" type="text" label="Nome" placeholder="Informe o nome" value={employee.name}
                     onChange={e => setEmployee(changeHandler(e, employee))} />
-                    <FormInput id="cpf" name="cpf" type="text" label="CPF" value={employee.cpf}
+                    <FormInput id="cpf" name="cpf" type="text" label="CPF" placeholder="Informe o CPF" value={employee.cpf}
                     onChange={e => setEmployee(changeHandler(e, employee))} />
                     <FormInput id="birth" name="birth" type="date" label="Nascimento" value={employee.birth}
                     onChange={e => setEmployee(changeHandler(e, employee))} />
