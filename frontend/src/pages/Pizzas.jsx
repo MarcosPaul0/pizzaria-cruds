@@ -22,13 +22,15 @@ export function Pizzas() {
                 <td className="py-2 px-8 text-center">{pizza.size}</td>
                 <td className="py-2 px-8 text-center">{pizza.description}</td>
                 <td className="py-2 px-8 text-center">{pizza.price}</td>
-                <td className="flex py-2 px-8 text-center">
+                <td className="vertical-middle py-2 px-8">
+                    <div className="flex">
                     <Link to={`/pizzas/update/${pizza.id}`} className="mr-2">
                         <img src={pencilImg} alt="ícone de caneta" className="h-6" />
                     </Link>
                     <Link to={`/pizzas/delete/${pizza.id}`}>
                         <img src={trashImg} alt="ícone de lixeira" className="h-5" />
                     </Link>
+                    </div>
                 </td>
             </tr>
         )

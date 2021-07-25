@@ -29,9 +29,9 @@ export function AddPizza() {
         <main className="main bg-yellow-100 flex flex-col items-center">
             <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
                 <div className="p-8">
-                    <FormSelect id="type" name="type" label="Tipo"
+                    <FormSelect id="type" name="type" label="Tipo" defaultValue="none"
                     onChange={e => setPizza(changeHandler(e, pizza))}>
-                        <option value="none" selected disabled hidden>
+                        <option value="none">
                             Selecione uma opção
                         </option>
                         <option value="Calabresa">Calabresa</option>
@@ -40,11 +40,11 @@ export function AddPizza() {
                         <option value="Marguerita">Marguerita</option>
                         <option value="Brócolis">Brócolis</option>
                         <option value="Frango Catupiry">Frango Catupiry</option>
-                        <option value="Quatro Queijos">Quatro queijos</option>
+                        <option value="Quatro Queijos">Quatro Queijos</option>
                     </FormSelect>
-                    <FormSelect id="size" name="size" label="Tamanho"
+                    <FormSelect id="size" name="size" label="Tamanho" defaultValue="none"
                     onChange={e => setPizza(changeHandler(e, pizza))}>
-                        <option value="none" selected disabled hidden>
+                        <option value="none">
                             Selecione uma opção
                         </option>
                         <option value="Família">Família</option>
@@ -52,7 +52,7 @@ export function AddPizza() {
                         <option value="Brotinho">Brotinho</option>
                     </FormSelect>
                     <FormTextArea id="description" name="description" type="text" label="Descrição" value={pizza.description}
-                    onChange={e => setPizza(changeHandler(e, pizza))} />
+                    placeholder="Recheio da pizza" onChange={e => setPizza(changeHandler(e, pizza))} />
                     <FormInput id="price" name="price" type="text" label="Preço (R$)" placeholder="0,00" value={pizza.price}
                     onChange={e => setPizza(changeHandler(e, pizza))} />
                     <div className="mt-4 flex justify-center space-x-5">
