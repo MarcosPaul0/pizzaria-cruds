@@ -15,7 +15,7 @@ export function DeletePizza(props) {
     {
       type: '',
       size: '',
-      description: '',
+      ingredients: '',
       price: '',
     },
     baseUrl
@@ -28,11 +28,11 @@ export function DeletePizza(props) {
           <FormInput id="type" name="type" type="text" label="Tipo" value={pizza.type} disabled />
           <FormInput id="code" name="code" type="text" label="Código" value={pizza.size} disabled />
           <FormTextArea
-            id="description"
-            name="description"
+            id="ingredients"
+            name="ingredients"
             type="text"
             label="Descrição"
-            value={pizza.description}
+            value={pizza.ingredients}
             disabled
           />
           <FormInput

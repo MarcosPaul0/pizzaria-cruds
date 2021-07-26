@@ -20,7 +20,7 @@ export function Pizzas() {
       <tr className="border-t border-gray-400" key={pizza.id}>
         <td className="py-2 px-8 text-center">{pizza.type}</td>
         <td className="py-2 px-8 text-center">{pizza.size}</td>
-        <td className="py-2 px-8 text-center">{pizza.description}</td>
+        <td className="py-2 px-8 text-center">{pizza.ingredients}</td>
         <td className="py-2 px-8 text-center">{pizza.price}</td>
         <td className="vertical-middle py-2 px-8">
           <div className="flex">
@@ -64,7 +64,7 @@ export function Pizzas() {
           <tbody className="bg-white">{pizzasList}</tbody>
         </table>
       </div>
-      <ButtonLink to={`/pizzas/add`} color="yellow">
+      <ButtonLink to={`/pizzas/add`} color="green">
         Nova pizza
       </ButtonLink>
     </main>

@@ -40,6 +40,7 @@ export function AddEmployee() {
             id="cpf"
             name="cpf"
             type="text"
+            pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"
             label="CPF"
             placeholder="Informe o CPF"
             value={employee.cpf}
@@ -62,7 +63,7 @@ export function AddEmployee() {
             onChange={(e) => setEmployee(changeHandler(e, employee))}
           />
           <div className="mt-4 flex justify-center space-x-5">
-            <Button color="yellow" onClick={() => addData(baseUrl, employee, clearHandler)}>
+            <Button color="green" onClick={() => addData(baseUrl, employee, clearHandler)}>
               Confirmar
             </Button>
             <Button color="red" onClick={() => clearHandler()}>

@@ -16,7 +16,7 @@ export function UpdatePizza(props) {
   const [pizza, setPizza] = useState({
     type: '',
     size: '',
-    description: '',
+    ingredients: '',
     price: '',
   });
 
@@ -26,20 +26,14 @@ export function UpdatePizza(props) {
     <main className="main bg-projectGray-25 flex flex-col items-center">
       <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
         <div className="p-8">
-          <FormSelect id="type" name="type" label="Tipo" onChange={(e) => setPizza(changeHandler(e, pizza))}>
-            <option value="none" selected disabled hidden>
-              Selecione uma opção
-            </option>
-            <option value="Calabresa">Calabresa</option>
-            <option value="Portuguesa">Portuguesa</option>
-            <option value="Muçarela">Muçarela</option>
-            <option value="Marguerita">Marguerita</option>
-            <option value="Brócolis">Brócolis</option>
-            <option value="Frango Catupiry">Frango Catupiry</option>
-            <option value="Quatro Queijos">Quatro queijos</option>
-          </FormSelect>
-          <FormSelect id="size" name="size" label="Tamanho" onChange={(e) => setPizza(changeHandler(e, pizza))}>
-            <option value="none" selected disabled hidden>
+          <FormInput 
+            id="type" 
+            name="type" 
+            label="Tipo"
+            value={pizza.type}
+            onChange={(e) => setPizza(changeHandler(e, pizza))} />
+          <FormSelect id="size" name="size" label="Tamanho" defaultValue="none" onChange={(e) => setPizza(changeHandler(e, pizza))}>
+            <option value="none">
               Selecione uma opção
             </option>
             <option value="Família">Família</option>
@@ -47,23 +41,24 @@ export function UpdatePizza(props) {
             <option value="Brotinho">Brotinho</option>
           </FormSelect>
           <FormTextArea
-            id="description"
-            name="description"
+            id="ingredients"
+            name="ingredients"
             type="text"
-            label="Descrição"
-            value={pizza.description}
+            label="Ingredientes"
+            value={pizza.ingredients}
             onChange={(e) => setPizza(changeHandler(e, pizza))}
           />
           <FormInput
             id="price"
             name="price"
-            type="text"
-            label="Preço"
+            type="number"
+            label="Preço (R$)" step="0.01"
+            placeholder="0,00"
             value={pizza.price}
             onChange={(e) => setPizza(changeHandler(e, pizza))}
           />
           <div className="mt-4 flex justify-center">
-            <Button color="yellow" onClick={() => updateData(baseUrl, pizza, backUrl, history)}>
+            <Button color="green" onClick={() => updateData(baseUrl, pizza, backUrl, history)}>
               Confirmar
             </Button>
           </div>

@@ -12,15 +12,15 @@ export function AddPizza() {
   const [pizza, setPizza] = useState({
     type: '',
     size: '',
-    description: '',
+    ingredients: '',
     price: '',
   });
-
+  
   function clearHandler() {
     setPizza({
       type: '',
       size: '',
-      description: '',
+      ingredients: '',
       price: '',
     });
   }
@@ -29,22 +29,13 @@ export function AddPizza() {
     <main className="main bg-projectGray-25 flex flex-col items-center">
       <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
         <div className="p-8">
-          <FormSelect
+          <FormInput
             id="type"
             name="type"
             label="Tipo"
-            defaultValue="none"
+            value={pizza.type}
             onChange={(e) => setPizza(changeHandler(e, pizza))}
-          >
-            <option value="none">Selecione uma opção</option>
-            <option value="Calabresa">Calabresa</option>
-            <option value="Portuguesa">Portuguesa</option>
-            <option value="Muçarela">Muçarela</option>
-            <option value="Marguerita">Marguerita</option>
-            <option value="Brócolis">Brócolis</option>
-            <option value="Frango Catupiry">Frango Catupiry</option>
-            <option value="Quatro Queijos">Quatro Queijos</option>
-          </FormSelect>
+          />
           <FormSelect
             id="size"
             name="size"
@@ -58,25 +49,26 @@ export function AddPizza() {
             <option value="Brotinho">Brotinho</option>
           </FormSelect>
           <FormTextArea
-            id="description"
-            name="description"
+            id="ingredients"
+            name="ingredients"
             type="text"
-            label="Descrição"
-            value={pizza.description}
+            label="Ingredientes"
+            value={pizza.ingredients}
             placeholder="Recheio da pizza"
             onChange={(e) => setPizza(changeHandler(e, pizza))}
           />
           <FormInput
             id="price"
             name="price"
-            type="text"
-            label="Preço (R$)"
+            type="number"
+            min="0.00" max="500.00"
+            label="Preço (R$)" step="0.01"
             placeholder="0,00"
             value={pizza.price}
             onChange={(e) => setPizza(changeHandler(e, pizza))}
           />
           <div className="mt-4 flex justify-center space-x-5">
-            <Button color="yellow" onClick={() => addData(baseUrl, pizza, clearHandler)}>
+            <Button color="green" onClick={() => addData(baseUrl, pizza, clearHandler)}>
               Confirmar
             </Button>
             <Button color="red" onClick={() => clearHandler()}>

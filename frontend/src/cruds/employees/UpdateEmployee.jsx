@@ -57,7 +57,7 @@ export function UpdateEmployee(props) {
             onChange={(e) => setEmployee(changeHandler(e, employee))}
           />
           <div className="mt-4 flex justify-center">
-            <Button color="yellow" onClick={() => updateData(baseUrl, employee, backUrl, history)}>
+            <Button color="green" onClick={() => updateData(baseUrl, employee, backUrl, history)}>
               Confirmar
             </Button>
           </div>

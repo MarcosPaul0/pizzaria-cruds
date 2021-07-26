@@ -62,7 +62,7 @@ export function Employees() {
           <tbody className="bg-white">{employeesList}</tbody>
         </table>
       </div>
-      <ButtonLink to={`/employees/add`} color="yellow">
+      <ButtonLink to={`/employees/add`} color="green">
         Novo Funcionário
       </ButtonLink>
     </main>

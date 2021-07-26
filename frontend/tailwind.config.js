@@ -12,9 +12,6 @@ module.exports = {
           default: '#941B0C',
           light: '#BF766D',
         },
-        projectGreen: {
-          default: '#2D936C',
-        },
         projectGray: {
           25: '#FFF6F6',
           50: '#E9E9E9',
