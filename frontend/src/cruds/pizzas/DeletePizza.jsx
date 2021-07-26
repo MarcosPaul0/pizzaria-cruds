@@ -2,7 +2,10 @@ import { useHistory } from 'react-router-dom';
 import { deleteData } from '../../hooks/useCrud';
 import { useDataDelete } from '../../hooks/useDataDelete';
 
-import { Button } from '../../components/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { OutlinedButton } from '../../components/OutlinedButton';
 import { FormInput } from '../../components/FormInput';
 import { FormTextArea } from '../../components/FormTextArea';
 
@@ -20,6 +23,18 @@ export function DeletePizza(props) {
     },
     baseUrl
   );
+
+  const notify = () =>
+    toast.error('Pizza excluída!', {
+      position: 'bottom-center',
+      onClose: () => history.push(backUrl),
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
 
   return (
     <main className="main bg-projectGray-25 flex flex-col items-center">
@@ -45,9 +60,10 @@ export function DeletePizza(props) {
             disabled
           />
           <div className="mt-4 flex justify-center">
-            <Button color="red" onClick={() => deleteData(baseUrl, backUrl, history)}>
+            <OutlinedButton color="projectRed-default" onClick={() => deleteData(baseUrl, notify)}>
               Excluir
-            </Button>
+            </OutlinedButton>
+            <ToastContainer />
           </div>
         </div>
       </div>

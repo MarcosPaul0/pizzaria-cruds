@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import { changeHandler, addData } from '../../hooks/useCrud';
 
+import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Button } from '../../components/Button';
+import { OutlinedButton } from '../../components/OutlinedButton';
 import { FormInput } from '../../components/FormInput';
 import { FormTextArea } from '../../components/FormTextArea';
 import { FormSelect } from '../../components/FormSelect';
 
 export function AddPizza() {
   const baseUrl = 'http://localhost:3001/pizzas';
+  const backUrl = '/pizzas';
+  const history = useHistory();
 
   const [pizza, setPizza] = useState({
     type: '',
@@ -15,7 +22,7 @@ export function AddPizza() {
     ingredients: '',
     price: '',
   });
-  
+
   function clearHandler() {
     setPizza({
       type: '',
@@ -24,6 +31,18 @@ export function AddPizza() {
       price: '',
     });
   }
+
+  const notify = () =>
+    toast.success('Pizza cadastrada com sucesso!', {
+      position: 'bottom-center',
+      onClose: () => history.push(backUrl),
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
 
   return (
     <main className="main bg-projectGray-25 flex flex-col items-center">
@@ -61,19 +80,22 @@ export function AddPizza() {
             id="price"
             name="price"
             type="number"
-            min="0.00" max="500.00"
-            label="Preço (R$)" step="0.01"
+            min="0.00"
+            max="500.00"
+            label="Preço (R$)"
+            step="0.01"
             placeholder="0,00"
             value={pizza.price}
             onChange={(e) => setPizza(changeHandler(e, pizza))}
           />
           <div className="mt-4 flex justify-center space-x-5">
-            <Button color="green" onClick={() => addData(baseUrl, pizza, clearHandler)}>
+            <Button color="green" onClick={() => addData(baseUrl, pizza, clearHandler, notify)}>
               Confirmar
             </Button>
-            <Button color="red" onClick={() => clearHandler()}>
+            <OutlinedButton color="projectRed-default" onClick={() => clearHandler()}>
               Limpar
-            </Button>
+            </OutlinedButton>
+            <ToastContainer />
           </div>
         </div>
       </div>
