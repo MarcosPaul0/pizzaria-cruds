@@ -31,7 +31,7 @@ export function Combos() {
     })
 
     return (
-        <main className=" main flex flex-col items-center bg-yellow-100">
+        <main className=" main flex flex-col items-center bg-projectGray-25">
             <div className="mt-8 border border-gray-400 rounded-xl overflow-hidden shadow-md">
                 <table className="table-fixed">
                     <thead className="bg-gray-300">
@@ -48,7 +48,7 @@ export function Combos() {
                     </tbody>
                 </table>
             </div>
-            <ButtonLink to={`/combos/add`} color="yellow">Novo combo</ButtonLink>
+            <ButtonLink to={`/combos/add`} color="green">Novo combo</ButtonLink>
         </main>
     )
 }

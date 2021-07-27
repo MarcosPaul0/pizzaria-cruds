@@ -33,7 +33,7 @@ export function UpdateCombo(props) {
                     <FormInput id="price" name="price" type="text" label="Preço" value={combo.price}
                     onChange={e => setCombo(changeHandler(e, combo))} />
                     <div className="mt-4 flex justify-center">
-                        <Button color="yellow" onClick={() => updateData(baseUrl, combo, backUrl, history)}>
+                        <Button color="green" onClick={() => updateData(baseUrl, combo, backUrl, history)}>
                             Confirmar   
                         </Button>
                     </div>
