@@ -1,28 +1,22 @@
 {
   "employees": [
     {
-      "name": "Marcos Paulo",
-      "cpf": "12345679810",
-      "birth": "2001-03-07",
-      "admission": "2021-07-14",
-      "id": 1
-    },
-    {
-      "name": "Pereira",
-      "cpf": "12345678095",
-      "birth": "2002-03-07",
-      "admission": "2020-06-20",
+      "name": "Paulo",
+      "cpf": "12345678920",
+      "birth": "2000-05-02",
+      "admission": "2021-06-11",
       "id": 3
-    },
-    {
-      "name": "André",
-      "cpf": "12345671256",
-      "birth": "2005-02-02",
-      "admission": "2021-07-25",
-      "id": 4
     }
   ],
-  "pizzas": [],
+  "pizzas": [
+    {
+      "type": "Calabresa",
+      "size": "Família",
+      "ingredients": "Calabresa, cebola, azeitona",
+      "price": "42.23",
+      "id": 1
+    }
+  ],
   "accompaniments": [],
   "combos": [],
   "sales": [],

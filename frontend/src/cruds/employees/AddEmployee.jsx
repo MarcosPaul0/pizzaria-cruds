@@ -31,7 +31,7 @@ export function AddEmployee() {
 
   const notify = () =>
     toast.success('Funcionário criado com sucesso!', {
-      position: 'bottom-center',
+      position: 'bottom-right',
       onClose: () => history.push('/employees'),
       autoClose: 5000,
       hideProgressBar: false,

@@ -25,7 +25,7 @@ export function UpdateEmployee(props) {
 
   const notify = () =>
     toast.success('Usuário alterado com sucesso!', {
-      position: 'bottom-center',
+      position: 'bottom-right',
       onClose: () => history.push(backUrl),
       autoClose: 5000,
       hideProgressBar: false,

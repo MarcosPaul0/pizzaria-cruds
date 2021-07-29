@@ -26,7 +26,7 @@ export function DeletePizza(props) {
 
   const notify = () =>
     toast.error('Pizza excluída!', {
-      position: 'bottom-center',
+      position: 'bottom-right',
       onClose: () => history.push(backUrl),
       autoClose: 5000,
       hideProgressBar: false,

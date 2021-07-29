@@ -25,7 +25,7 @@ export function DeleteEmployee(props) {
 
   const notify = () =>
     toast.error('Usuário excluído!', {
-      position: 'bottom-center',
+      position: 'bottom-right',
       onClose: () => history.push(backUrl),
       autoClose: 5000,
       hideProgressBar: false,

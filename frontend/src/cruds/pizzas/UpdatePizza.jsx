@@ -27,7 +27,7 @@ export function UpdatePizza(props) {
 
   const notify = () =>
     toast.success('Pizza alterada com sucesso!', {
-      position: 'bottom-center',
+      position: 'bottom-right',
       onClose: () => history.push(backUrl),
       autoClose: 5000,
       hideProgressBar: false,

@@ -10,7 +10,7 @@ export function Payments() {
 
   const [search, setSearch] = useState("");
 
-  const data = useData(baseUrl, search, "clientName");
+  const data = useData(baseUrl, search, "client");
 
   const paymentsList = data.map((payment) => {
     return (

@@ -12,7 +12,7 @@ export function Sales() {
 
   const [search, setSearch] = useState("");
 
-  const data = useData(baseUrl, search, "clientName");
+  const data = useData(baseUrl, search, "client");
 
   const salesList = data.map((sale) => {
     return (

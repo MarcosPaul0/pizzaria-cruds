@@ -55,7 +55,7 @@ export function Router() {
 
             <Route path="/sales" exact component={ Sales }/>
             <Route path="/sales/add" component={ AddSale }/>
-            <Route path="/sales/update:id" component={ UpdateSale }/>
+            <Route path="/sales/update/:id" component={ UpdateSale }/>
             
             <Route path="/payments" exact component={ Payments }/>
             <Route path="/payments/add" exact component={ AddPayment }/>
