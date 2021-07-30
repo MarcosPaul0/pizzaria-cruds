@@ -1,12 +1,18 @@
 import { useState } from "react";
+import { useHistory } from 'react-router-dom'
 import { changeHandler, addData } from "../../hooks/useCrud";
 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 import { OutlinedButton } from '../../components/OutlinedButton';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export function AddCombo() {
   const baseUrl = "http://localhost:3001/combos";
+  const backUrl = '/combos';
+  const history = useHistory();
 
   const [combo, setCombo] = useState({
     code: "",
@@ -23,6 +29,18 @@ export function AddCombo() {
       price: "",
     });
   }
+
+  const notify = () =>
+    toast.success('Combo cadastrado com sucesso!', {
+      position: 'bottom-right',
+      onClose: () => history.push(backUrl),
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
 
   return (
     <main className="main bg-yellow-100 flex flex-col items-center">
@@ -63,7 +81,7 @@ export function AddCombo() {
           <div className="mt-4 flex justify-center space-x-5">
             <Button
               color="green"
-              onClick={() => addData(baseUrl, combo, clearHandler)}
+              onClick={() => addData(baseUrl, combo, clearHandler, notify)}
             >
               Confirmar
             </Button>
@@ -73,6 +91,7 @@ export function AddCombo() {
             >
               Limpar
             </OutlinedButton>
+            <ToastContainer />
           </div>
         </div>
       </div>
