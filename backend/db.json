@@ -1,24 +1,72 @@
 {
   "employees": [
     {
+      "name": "Marcos",
+      "cpf": "12345678910",
+      "birth": "2001-03-07",
+      "admission": "2021-08-01",
+      "id": 1
+    },
+    {
       "name": "Paulo",
-      "cpf": "12345678920",
-      "birth": "2000-05-02",
-      "admission": "2021-06-11",
-      "id": 3
+      "cpf": "12345678911",
+      "birth": "2000-05-05",
+      "admission": "2021-08-01",
+      "id": 2
     }
   ],
   "pizzas": [
     {
-      "type": "Calabresa",
+      "name": "Pizza de Calabresa",
       "size": "Família",
-      "ingredients": "Calabresa, cebola, azeitona",
-      "price": "42.23",
+      "ingredients": "Linguiça calabresa, azeitona, cebola e muçarela",
+      "price": "30.00",
+      "id": 1
+    },
+    {
+      "name": "Pizza de Quatro Queijos",
+      "size": "Família",
+      "ingredients": "Queijo muçarela, gorgonzola, requijão e parmesão",
+      "price": "26.50",
+      "id": 2
+    },
+    {
+      "name": "Pizza Portuguesa",
+      "size": "Família",
+      "ingredients": "Queijo muçarela, presunto, pimentão, tomate e cebola",
+      "price": "32.00",
+      "id": 3
+    }
+  ],
+  "accompaniments": [
+    {
+      "name": "Refrigerante",
+      "description": "Refrigerante Guaraná 600ml",
+      "price": "8,00",
+      "id": 1
+    },
+    {
+      "name": "Suco",
+      "description": "Suco de Laranja 600ml",
+      "price": "5,00",
+      "id": 2
+    },
+    {
+      "name": "Água",
+      "description": "Água mineral 600ml",
+      "price": "4,00",
+      "id": 3
+    }
+  ],
+  "combos": [
+    {
+      "products": "Pizza, Refrigerante",
+      "description": "",
+      "price": "35",
+      "name": "Pizza + Refrigerante",
       "id": 1
     }
   ],
-  "accompaniments": [],
-  "combos": [],
   "sales": [],
   "payments": []
 }
