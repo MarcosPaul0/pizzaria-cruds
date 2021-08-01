@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 
-export function useData(baseUrl, search, order) {
+export function useData(baseUrl, order, search) {
     const [data, setData] = useState([])
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export function useData(baseUrl, search, order) {
             }
         }
         getData()
-    }, [baseUrl, search, order])
+    }, [baseUrl, order, search])
 
     return data
 }

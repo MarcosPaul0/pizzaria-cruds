@@ -1,18 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useData } from "../hooks/useData";
+import { addToPayment } from '../hooks/useSale'
 
 import pencilImg from "../assets/images/pencilIcon.svg";
 import searchImg from "../assets/images/searchIcon.svg";
-
-import { ButtonLink } from "../components/ButtonLink";
+import okImg from '../assets/images/okIcon.svg'
 
 export function Sales() {
   const baseUrl = "http://localhost:3001/sales";
+  const history = useHistory()
 
   const [search, setSearch] = useState("");
 
-  const data = useData(baseUrl, search, "client");
+  const data = useData(baseUrl, "client", search);
 
   const salesList = data.map((sale) => {
     return (
@@ -24,8 +25,11 @@ export function Sales() {
         <td className="py-2 px-8 text-center">{sale.total}</td>
         <td className="flex py-2 px-8 text-center">
           <Link to={`/sales/update/${sale.id}`} className="mr-2">
-            <img src={pencilImg} alt="ícone de caneta" className="h-6" />
+            <img src={pencilImg} alt="Ícone de caneta" className="h-6" />
           </Link>
+          <button onClick={e => addToPayment(sale, history)}>
+            <img src={okImg} alt="Ícone de ok" className="h-4" />
+          </button>
         </td>
       </tr>
     );
@@ -60,9 +64,6 @@ export function Sales() {
           <tbody className="bg-white">{salesList}</tbody>
         </table>
       </div>
-      <ButtonLink to={`/sales/add`} color="green">
-        Registrar Venda
-      </ButtonLink>
     </main>
   );
 }

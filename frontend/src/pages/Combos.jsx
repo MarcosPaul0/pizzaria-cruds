@@ -13,7 +13,7 @@ export function Combos() {
 
   const [search, setSearch] = useState('');
   
-  const data = useData(baseUrl, search, 'name');
+  const data = useData(baseUrl, 'name', search);
 
   const combosList = data.map((combo) => {
     return (

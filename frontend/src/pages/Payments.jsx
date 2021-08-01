@@ -3,14 +3,12 @@ import { useData } from "../hooks/useData";
 
 import searchImg from "../assets/images/searchIcon.svg";
 
-import { ButtonLink } from "../components/ButtonLink";
-
 export function Payments() {
   const baseUrl = "http://localhost:3001/payments";
 
   const [search, setSearch] = useState("");
 
-  const data = useData(baseUrl, search, "client");
+  const data = useData(baseUrl, "client", search);
 
   const paymentsList = data.map((payment) => {
     return (
@@ -52,9 +50,6 @@ export function Payments() {
           <tbody className="bg-white">{paymentsList}</tbody>
         </table>
       </div>
-      <ButtonLink to={`/payments/add`} color="green">
-        Registrar Pagamento
-      </ButtonLink>
     </main>
   );
 }

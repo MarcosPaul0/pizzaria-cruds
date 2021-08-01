@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { changeHandler, addData } from "../../hooks/useCrud";
-
 import { useHistory } from "react-router-dom";
+import { changeHandler, addData } from "../../hooks/useCrud";
+import { useData } from "../../hooks/useData";
+import { productsSale } from '../../hooks/useSale'
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Button } from "../../components/Button";
-import { OutlinedButton } from "../../components/OutlinedButton";
 import { FormInput } from "../../components/FormInput";
 import { FormSelect } from "../../components/FormSelect";
 import { FormTextArea } from "../../components/FormTextArea";
@@ -17,11 +18,11 @@ export function AddPayment() {
   const history = useHistory();
 
   const [payment, setPayment] = useState({
-    client: "",
+    client: productsSale.client,
     date: "",
     employee: "",
-    amount: "",
-    receipt: "",
+    amount: productsSale.price,
+    receipt: `Recebi(emos) de ${productsSale.client}, a importância de ${toString(productsSale.price).replace('.', ',')} referente a compra de ${productsSale.price}`,
   });
 
   function clearHandler() {
@@ -33,6 +34,12 @@ export function AddPayment() {
       receipt: "",
     });
   }
+
+  const employees = useData('http://localhost:3001/employees', 'name')
+
+  const employeeOptions = employees.map(employee =>
+    <option key={employee.cpf} value={employee.name}>{employee.name}</option>
+    )
 
   const notify = () =>
     toast.success("Venda cadastrada com sucesso!", {
@@ -73,6 +80,7 @@ export function AddPayment() {
             onChange={(e) => setPayment(changeHandler(e, payment))}
           >
             <option value="none">Selecione uma opção</option>
+            {employeeOptions}
           </FormSelect>
           <FormInput
             id="amount"
@@ -97,12 +105,6 @@ export function AddPayment() {
             >
               Confirmar
             </Button>
-            <OutlinedButton
-              color="projectRed-default"
-              onClick={() => clearHandler()}
-            >
-              Limpar
-            </OutlinedButton>
             <ToastContainer />
           </div>
         </div>

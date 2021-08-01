@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { useData } from '../hooks/useData';
 import { Link } from 'react-router-dom';
+import { useData } from '../hooks/useData';
+import { addToSale } from '../hooks/useSale'
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import trashImg from '../assets/images/trashIcon.svg';
 import pencilImg from '../assets/images/pencilIcon.svg';
 import searchImg from '../assets/images/searchIcon.svg';
+import addToSaleImg from '../assets/images/addSaleIcon.svg'
 
 import { ButtonLink } from '../components/ButtonLink';
 
@@ -13,12 +18,23 @@ export function Pizzas() {
 
   const [search, setSearch] = useState('');
 
-  const data = useData(baseUrl, search, 'type');
+  const data = useData(baseUrl, 'name', search);
+
+  const notify = () =>
+    toast.success('Pizza adicionada ao carrinho!', {
+      position: 'bottom-right',
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
 
   const pizzasList = data.map((pizza) => {
     return (
       <tr className="border-t border-gray-400" key={pizza.id}>
-        <td className="py-2 px-8 text-center">{pizza.type}</td>
+        <td className="py-2 px-8 text-center">{pizza.name}</td>
         <td className="py-2 px-8 text-center">{pizza.size}</td>
         <td className="py-2 px-8 text-center">{pizza.ingredients}</td>
         <td className="py-2 px-8 text-center">{pizza.price}</td>
@@ -27,9 +43,13 @@ export function Pizzas() {
             <Link to={`/pizzas/update/${pizza.id}`} className="mr-2">
               <img src={pencilImg} alt="ícone de caneta" className="h-6" />
             </Link>
-            <Link to={`/pizzas/delete/${pizza.id}`}>
+            <Link to={`/pizzas/delete/${pizza.id}`} className="mr-3">
               <img src={trashImg} alt="ícone de lixeira" className="h-5" />
             </Link>
+            <button onClick={e => addToSale(pizza.name, pizza.price, notify)}>
+              <img src={addToSaleImg} alt="Ícone de carrinho com um sinal de adição" />
+            </button>
+            <ToastContainer/>
           </div>
         </td>
       </tr>

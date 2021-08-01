@@ -81,7 +81,7 @@ export function AddAccompaniment() {
           />
           <div className="mt-4 flex justify-center space-x-5">
             <Button
-              color="yellow"
+              color="green"
               onClick={() => addData(baseUrl, accompaniment, clearHandler, notify)}
             >
               Confirmar

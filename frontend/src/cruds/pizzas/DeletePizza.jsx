@@ -16,7 +16,7 @@ export function DeletePizza(props) {
 
   const pizza = useDataDelete(
     {
-      type: '',
+      name: '',
       size: '',
       ingredients: '',
       price: '',
@@ -40,7 +40,7 @@ export function DeletePizza(props) {
     <main className="main bg-projectGray-25 flex flex-col items-center">
       <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
         <div className="p-8">
-          <FormInput id="type" name="type" type="text" label="Tipo" value={pizza.type} disabled />
+          <FormInput id="name" name="name" type="text" label="Tipo" value={pizza.name} disabled />
           <FormInput id="code" name="code" type="text" label="Código" value={pizza.size} disabled />
           <FormTextArea
             id="ingredients"

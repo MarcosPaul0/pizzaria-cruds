@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { changeHandler, addData } from "../../hooks/useCrud";
-
 import { useHistory } from "react-router-dom";
+import { changeHandler, addData } from "../../hooks/useCrud";
+import { useData } from '../../hooks/useData'
+import { productsSale, resetProducts } from '../../hooks/useSale'
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,8 +21,8 @@ export function AddSale() {
     client: "",
     date: "",
     employee: "",
-    products: "",
-    total: "",
+    products: productsSale.products,
+    total: productsSale.price.toFixed(2),
   });
 
   function clearHandler() {
@@ -31,7 +33,15 @@ export function AddSale() {
       products: "",
       total: "",
     });
+
+    resetProducts()
   }
+
+  const employees = useData('http://localhost:3001/employees', 'name')
+
+  const employeeOptions = employees.map(employee =>
+    <option key={employee.cpf} value={employee.name}>{employee.name}</option>
+    )
 
   const notify = () =>
     toast.success("Venda cadastrada com sucesso!", {
@@ -72,26 +82,24 @@ export function AddSale() {
             onChange={(e) => setSale(changeHandler(e, sale))}
           >
             <option value="none">Selecione uma opção</option>
+            {employeeOptions}
           </FormSelect>
-          <FormSelect
+          <FormInput
             id="products"
             name="products"
+            type="text"
             label="Produtos"
-            defaultValue="none"
-            onChange={(e) => setSale(changeHandler(e, sale))}
+            disabled
+            value={sale.products}
           >
-            <option value="none">Selecione uma opção</option>
-          </FormSelect>
+          </FormInput>
           <FormInput
             id="total"
             name="total"
-            type="number"
-            min="0.00"
+            type="text"
             label="Preço (R$)"
-            step="0.01"
-            placeholder="0,00"
+            disabled
             value={sale.total}
-            onChange={(e) => setSale(changeHandler(e, sale))}
           />
           <div className="mt-4 flex justify-center space-x-5">
             <Button

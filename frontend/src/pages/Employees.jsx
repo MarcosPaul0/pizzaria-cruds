@@ -13,7 +13,7 @@ export function Employees() {
 
   const [search, setSearch] = useState('');
 
-  const data = useData(baseUrl, search, 'name');
+  const data = useData(baseUrl, 'name', search);
 
   const employeesList = data.map((employee) => {
     return (

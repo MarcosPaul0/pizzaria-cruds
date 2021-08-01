@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { changeHandler, updateData } from "../../hooks/useCrud";
 import { useDataUpdate } from "../../hooks/useDataUpdate";
+import { useData } from '../../hooks/useData'
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,6 +25,12 @@ export function UpdateSale(props) {
   });
 
   useDataUpdate(baseUrl, setSale);
+
+  const employees = useData('http://localhost:3001/employees', 'name')
+
+  const employeeOptions = employees.map(employee =>
+    <option key={employee.cpf} value={employee.name}>{employee.name}</option>
+    )
 
   const notify = () =>
     toast.success("Venda alterada com sucesso!", {
@@ -64,16 +71,16 @@ export function UpdateSale(props) {
             onChange={(e) => setSale(changeHandler(e, sale))}
           >
             <option value="none">Selecione uma opção</option>
+            {employeeOptions}
           </FormSelect>
-          <FormSelect
+          <FormInput
             id="products"
             name="products"
             label="Produtos"
-            defaultValue="none"
+            value={sale.products}
             onChange={(e) => setSale(changeHandler(e, sale))}
           >
-            <option value="none">Selecione uma opção</option>
-          </FormSelect>
+          </FormInput>
           <FormInput
             id="total"
             name="total"

@@ -17,7 +17,7 @@ export function UpdatePizza(props) {
   const history = useHistory();
 
   const [pizza, setPizza] = useState({
-    type: '',
+    name: '',
     size: '',
     ingredients: '',
     price: '',
@@ -42,10 +42,10 @@ export function UpdatePizza(props) {
       <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
         <div className="p-8">
           <FormInput
-            id="type"
-            name="type"
+            id="name"
+            name="name"
             label="Tipo"
-            value={pizza.type}
+            value={pizza.name}
             onChange={(e) => setPizza(changeHandler(e, pizza))}
           />
           <FormSelect

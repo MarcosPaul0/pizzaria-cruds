@@ -74,7 +74,7 @@ export function UpdateAccompaniment(props) {
           />
           <div className="mt-4 flex justify-center">
             <Button
-              color="yellow"
+              color="green"
               onClick={() =>
                 updateData(baseUrl, accompaniment, notify)
               }

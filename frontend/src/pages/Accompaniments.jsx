@@ -13,7 +13,7 @@ export function Accompaniments() {
 
   const [search, setSearch] = useState('');
   
-  const data = useData(baseUrl, search, 'name');
+  const data = useData(baseUrl, 'name', search);
   
   const accompanimentsList = data.map((accompaniment) => {
     return (
