@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import { useData } from "../hooks/useData";
 import { Link } from "react-router-dom";
+import { addToSale } from '../hooks/useSale'
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import trashImg from "../assets/images/trashIcon.svg";
 import pencilImg from "../assets/images/pencilIcon.svg";
 import searchImg from '../assets/images/searchIcon.svg';
+import addToSaleImg from '../assets/images/addSaleIcon.svg'
 
 import { ButtonLink } from "../components/ButtonLink";
 
@@ -15,10 +20,20 @@ export function Combos() {
   
   const data = useData(baseUrl, 'name', search);
 
+  const notify = () =>
+    toast.success('Combo adicionado ao carrinho!', {
+      position: 'bottom-right',
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
+
   const combosList = data.map((combo) => {
     return (
       <tr className="border-t border-gray-400" key={combo.id}>
-        <td className="py-2 px-8 text-center">{combo.code}</td>
         <td className="py-2 px-8 text-center">{combo.name}</td>
         <td className="py-2 px-8 text-center">{combo.products}</td>
         <td className="py-2 px-8 text-center">{combo.price}</td>
@@ -26,9 +41,13 @@ export function Combos() {
           <Link to={`/combos/update/${combo.id}`} className="mr-2">
             <img src={pencilImg} alt="ícone de caneta" className="h-6" />
           </Link>
-          <Link to={`/combos/delete/${combo.id}`}>
+          <Link to={`/combos/delete/${combo.id}`} className="mr-2">
             <img src={trashImg} alt="ícone de lixeira" className="h-5" />
           </Link>
+          <button onClick={e => addToSale(combo.name, combo.price, notify)}>
+            <img src={addToSaleImg} alt="Ícone de carrinho com um sinal de adição" />
+          </button>
+          <ToastContainer />
         </td>
       </tr>
     );
@@ -52,7 +71,6 @@ export function Combos() {
         <table className="table-fixed">
           <thead className="bg-gray-300">
             <tr>
-              <th className="py-2 px-8 text-center">Código</th>
               <th className="py-2 px-8 text-center">Nome</th>
               <th className="py-2 px-8 text-center">Produtos</th>
               <th className="py-2 px-8 text-center">Preço</th>

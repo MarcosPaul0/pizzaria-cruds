@@ -15,7 +15,6 @@ export function AddCombo() {
   const history = useHistory();
 
   const [combo, setCombo] = useState({
-    code: "",
     products: "",
     description: "",
     price: "",
@@ -23,7 +22,6 @@ export function AddCombo() {
 
   function clearHandler() {
     setCombo({
-      code: "",
       name: "",
       products: "",
       price: "",
@@ -46,14 +44,6 @@ export function AddCombo() {
     <main className="main bg-yellow-100 flex flex-col items-center">
       <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
         <div className="p-8">
-          <FormInput
-            id="code"
-            name="code"
-            type="text"
-            label="Código"
-            value={combo.code}
-            onChange={(e) => setCombo(changeHandler(e, combo))}
-          />
           <FormInput
             id="name"
             name="name"

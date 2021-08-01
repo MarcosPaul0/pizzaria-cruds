@@ -15,7 +15,6 @@ export function DeleteCombo(props) {
 
   const combo = useDataDelete(
     {
-      code: "",
       name: "",
       products: "",
       price: "",
@@ -39,14 +38,6 @@ export function DeleteCombo(props) {
     <main className="main bg-yellow-100 flex flex-col items-center">
       <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
         <div className="p-8">
-          <FormInput
-            id="code"
-            name="code"
-            type="text"
-            label="Código"
-            value={combo.code}
-            disabled
-          />
           <FormInput
             id="name"
             name="name"
