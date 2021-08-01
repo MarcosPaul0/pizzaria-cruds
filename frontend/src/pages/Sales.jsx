@@ -44,7 +44,7 @@ export function Sales() {
           value={search}
           type="text"
           className="rounded-2xl pl-2 outline-none w-52"
-          placeholder="Digite o CPF ou Nome"
+          placeholder="Digite o Cliente ou Data"
           onChange={(e) => setSearch(e.target.value)}
         />
         <img src={searchImg} alt="Ícone de lupa" className="p-1" />

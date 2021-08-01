@@ -44,7 +44,7 @@ export function AddSale() {
     )
 
   const notify = () =>
-    toast.success("Venda cadastrada com sucesso!", {
+    toast.success("Venda registrada com sucesso!", {
       position: "bottom-right",
       onClose: () => history.push(backUrl),
       autoClose: 5000,

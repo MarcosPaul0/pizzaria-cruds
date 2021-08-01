@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import { useData } from "../hooks/useData";
 import { Link } from "react-router-dom";
+import { addToSale } from '../hooks/useSale'
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import trashImg from "../assets/images/trashIcon.svg";
 import pencilImg from "../assets/images/pencilIcon.svg";
 import searchImg from '../assets/images/searchIcon.svg';
+import addToSaleImg from '../assets/images/addSaleIcon.svg'
 
 import { ButtonLink } from "../components/ButtonLink";
 
@@ -14,24 +19,35 @@ export function Accompaniments() {
   const [search, setSearch] = useState('');
   
   const data = useData(baseUrl, 'name', search);
+
+  const notify = () =>
+    toast.success('Acompanhamento adicionada ao carrinho!', {
+      position: 'bottom-right',
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
   
   const accompanimentsList = data.map((accompaniment) => {
     return (
       <tr className="border-t border-gray-400" key={accompaniment.id}>
-        <td className="py-2 px-8 text-center">{accompaniment.code}</td>
         <td className="py-2 px-8 text-center">{accompaniment.name}</td>
         <td className="py-2 px-8 text-center">{accompaniment.description}</td>
         <td className="py-2 px-8 text-center">{accompaniment.price}</td>
         <td className="flex py-2 px-8 text-center">
-          <Link
-            to={`/accompaniments/update/${accompaniment.id}`}
-            className="mr-2"
-          >
+          <Link to={`/accompaniments/update/${accompaniment.id}`} className="mr-2">
             <img src={pencilImg} alt="ícone de caneta" className="h-6" />
           </Link>
-          <Link to={`/accompaniments/delete/${accompaniment.id}`}>
+          <Link to={`/accompaniments/delete/${accompaniment.id}`} className="mr-2">
             <img src={trashImg} alt="ícone de lixeira" className="h-5" />
           </Link>
+          <button onClick={e => addToSale(accompaniment.name, accompaniment.price, notify)}>
+            <img src={addToSaleImg} alt="Ícone de carrinho com um sinal de adição" />
+          </button>
+          <ToastContainer />
         </td>
       </tr>
     );
@@ -55,7 +71,6 @@ export function Accompaniments() {
         <table className="table-fixed">
           <thead className="bg-gray-300">
             <tr>
-              <th className="py-2 px-8 text-center">Código</th>
               <th className="py-2 px-8 text-center">Nome</th>
               <th className="py-2 px-8 text-center">Descrição</th>
               <th className="py-2 px-8 text-center">Preço</th>

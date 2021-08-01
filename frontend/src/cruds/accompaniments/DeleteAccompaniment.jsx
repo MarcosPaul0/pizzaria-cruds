@@ -16,7 +16,6 @@ export function DeleteAccompaniment(props) {
 
   const accompaniment = useDataDelete(
     {
-      code: "",
       name: "",
       description: "",
       price: "",
@@ -40,14 +39,6 @@ export function DeleteAccompaniment(props) {
     <main className="main bg-yellow-100 flex flex-col items-center">
       <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
         <div className="p-8">
-          <FormInput
-            id="code"
-            name="code"
-            type="text"
-            label="Código"
-            value={accompaniment.code}
-            disabled
-          />
           <FormInput
             id="name"
             name="name"

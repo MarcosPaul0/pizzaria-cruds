@@ -22,7 +22,7 @@ export function AddPayment() {
     date: "",
     employee: "",
     amount: productsSale.price,
-    receipt: `Recebi(emos) de ${productsSale.client}, a importância de ${toString(productsSale.price).replace('.', ',')} referente a compra de ${productsSale.price}`,
+    receipt: `Recebi(emos) de ${productsSale.client}, a importância de ${productsSale.price} referente a compra de ${productsSale.products}`,
   });
 
   function clearHandler() {
@@ -42,7 +42,7 @@ export function AddPayment() {
     )
 
   const notify = () =>
-    toast.success("Venda cadastrada com sucesso!", {
+    toast.success("Pagamento registrado com sucesso!", {
       position: "bottom-right",
       onClose: () => history.push(backUrl),
       autoClose: 5000,
