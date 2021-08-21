@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { changeHandler, updateData } from "../../hooks/useCrud";
 import { useDataUpdate } from "../../hooks/useDataUpdate";
 
+import { Card } from '../../components/Card' 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 import { FormTextArea } from "../../components/FormTextArea";
@@ -36,46 +37,42 @@ export function UpdateAccompaniment(props) {
   useDataUpdate(baseUrl, setAccompaniment);
 
   return (
-    <main className="main bg-yellow-100 flex flex-col items-center">
-      <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
-        <div className="p-8">
-          <FormInput
-            id="name"
-            name="name"
-            type="text"
-            label="Nome"
-            value={accompaniment.name}
-            onChange={(e) => setAccompaniment(changeHandler(e, accompaniment))}
-          />
-          <FormTextArea
-            id="description"
-            name="description"
-            type="text"
-            label="Descrição"
-            value={accompaniment.description}
-            onChange={(e) => setAccompaniment(changeHandler(e, accompaniment))}
-          />
-          <FormInput
-            id="price"
-            name="price"
-            type="text"
-            label="Preço"
-            value={accompaniment.price}
-            onChange={(e) => setAccompaniment(changeHandler(e, accompaniment))}
-          />
-          <div className="mt-4 flex justify-center">
-            <Button
-              color="green"
-              onClick={() =>
-                updateData(baseUrl, accompaniment, notify)
-              }
-            >
-              Confirmar
-            </Button>
-            <ToastContainer />
-          </div>
-        </div>
+    <Card>
+      <FormInput
+        id="name"
+        name="name"
+        type="text"
+        label="Nome"
+        value={accompaniment.name}
+        onChange={(e) => setAccompaniment(changeHandler(e, accompaniment))}
+      />
+      <FormTextArea
+        id="description"
+        name="description"
+        type="text"
+        label="Descrição"
+        value={accompaniment.description}
+        onChange={(e) => setAccompaniment(changeHandler(e, accompaniment))}
+      />
+      <FormInput
+        id="price"
+        name="price"
+        type="text"
+        label="Preço"
+        value={accompaniment.price}
+        onChange={(e) => setAccompaniment(changeHandler(e, accompaniment))}
+      />
+      <div className="mt-4 flex justify-center">
+        <Button
+          color="green"
+          onClick={() =>
+            updateData(baseUrl, accompaniment, notify)
+          }
+        >
+          Confirmar
+        </Button>
+        <ToastContainer />
       </div>
-    </main>
+    </Card>
   );
 }

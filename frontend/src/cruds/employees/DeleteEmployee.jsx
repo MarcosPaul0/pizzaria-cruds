@@ -5,6 +5,7 @@ import { useDataDelete } from '../../hooks/useDataDelete';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { Card } from '../../components/Card' 
 import { OutlinedButton } from '../../components/OutlinedButton';
 import { FormInput } from '../../components/FormInput';
 
@@ -36,24 +37,20 @@ export function DeleteEmployee(props) {
     });
 
   return (
-    <main className="main bg-projectGray-25 flex flex-col items-center">
-      <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
-        <div className="p-8">
-          <FormInput id="name" name="name" type="text" label="Nome" value={employee.name} disabled />
-          <FormInput id="cpf" name="cpf" type="text" label="CPF" value={employee.cpf} disabled />
-          <FormInput id="birth" name="birth" type="date" label="Nascimento" value={employee.birth} disabled />
-          <FormInput id="admission" name="admission" type="date" label="Admissão" value={employee.admission} disabled />
-          <div className="mt-4 flex justify-center">
-            {/* <Button color="red" onClick={() => deleteData(baseUrl, backUrl, history)}>
-              Excluir
-            </Button> */}
-            <OutlinedButton color="projectRed-default" onClick={() => deleteData(baseUrl, notify)}>
-              Excluir
-            </OutlinedButton>
-            <ToastContainer />
-          </div>
-        </div>
+    <Card>
+      <FormInput id="name" name="name" type="text" label="Nome" value={employee.name} disabled />
+      <FormInput id="cpf" name="cpf" type="text" label="CPF" value={employee.cpf} disabled />
+      <FormInput id="birth" name="birth" type="date" label="Nascimento" value={employee.birth} disabled />
+      <FormInput id="admission" name="admission" type="date" label="Admissão" value={employee.admission} disabled />
+      <div className="mt-4 flex justify-center">
+        {/* <Button color="red" onClick={() => deleteData(baseUrl, backUrl, history)}>
+          Excluir
+        </Button> */}
+        <OutlinedButton color="projectRed-default" onClick={() => deleteData(baseUrl, notify)}>
+          Excluir
+        </OutlinedButton>
+        <ToastContainer />
       </div>
-    </main>
+    </Card>
   );
 }

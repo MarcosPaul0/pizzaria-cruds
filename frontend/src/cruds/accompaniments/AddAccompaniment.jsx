@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useHistory } from 'react-router-dom'
 import { changeHandler, addData } from "../../hooks/useCrud";
 
+import { Card } from '../../components/Card' 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 import { FormTextArea } from "../../components/FormTextArea";
@@ -42,9 +43,7 @@ export function AddAccompaniment() {
     });
 
   return (
-    <main className="main bg-yellow-100 flex flex-col items-center">
-      <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
-        <div className="p-8">
+    <Card>
           <FormInput
             id="name"
             name="name"
@@ -84,8 +83,6 @@ export function AddAccompaniment() {
             </OutlinedButton>
             <ToastContainer />
           </div>
-        </div>
-      </div>
-    </main>
+    </Card>
   );
 }

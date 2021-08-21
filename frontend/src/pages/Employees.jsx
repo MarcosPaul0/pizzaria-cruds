@@ -4,9 +4,10 @@ import { useData } from '../hooks/useData';
 
 import trashImg from '../assets/images/trashIcon.svg';
 import pencilImg from '../assets/images/pencilIcon.svg';
-import searchImg from '../assets/images/searchIcon.svg';
 
 import { ButtonLink } from '../components/ButtonLink';
+import { Search } from '../components/Search';
+import { Table } from '../components/Table';
 
 export function Employees() {
   const baseUrl = 'http://localhost:3001/employees';
@@ -36,32 +37,22 @@ export function Employees() {
 
   return (
     <main className=" main flex flex-col items-center bg-projectGray-25">
-      <div className="mt-6 border-2 border-red-700 bg-red-700 flex flex-row rounded-2xl overflow-hidden">
-        <input
-          id="search"
-          name="search"
-          value={search}
-          type="text"
-          className="rounded-2xl pl-2 outline-none w-52"
-          placeholder="Digite o CPF ou Nome"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <img src={searchImg} alt="Ícone de lupa" className="p-1" />
-      </div>
-      <div className="mt-6 border border-gray-400 rounded-xl overflow-hidden shadow-md">
-        <table className="table-fixed">
-          <thead className="bg-gray-300">
-            <tr>
-              <th className="py-2 px-8 text-center">CPF</th>
-              <th className="py-2 px-8 text-center">Nome</th>
-              <th className="py-2 px-8 text-center">Admissão</th>
-              <th className="py-2 px-8 text-center">Nascimento</th>
-              <th className="py-2 px-8 text-center">Ações</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white">{employeesList}</tbody>
-        </table>
-      </div>
+      <Search
+        placeholder="Digite o CPF ou Nome"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)} />
+      <Table>
+        <thead className="bg-gray-300">
+          <tr>
+            <th className="py-2 px-8 text-center">CPF</th>
+            <th className="py-2 px-8 text-center">Nome</th>
+            <th className="py-2 px-8 text-center">Admissão</th>
+            <th className="py-2 px-8 text-center">Nascimento</th>
+            <th className="py-2 px-8 text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody className="bg-white">{employeesList}</tbody>
+      </Table>
       <ButtonLink to={`/employees/add`} color="green">
         Novo Funcionário
       </ButtonLink>

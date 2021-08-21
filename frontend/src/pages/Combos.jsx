@@ -1,35 +1,28 @@
-import { useState } from 'react'
+import { Link, useHistory } from "react-router-dom";
+import { useState, useContext } from 'react'
 import { useData } from "../hooks/useData";
-import { Link } from "react-router-dom";
-import { addToSale } from '../hooks/useSale'
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { SaleContext } from '../context/SaleContext'
+
+import { useNotify } from '../hooks/useNotify'
+import { ToastContainer } from "react-toastify";
 
 import trashImg from "../assets/images/trashIcon.svg";
 import pencilImg from "../assets/images/pencilIcon.svg";
-import searchImg from '../assets/images/searchIcon.svg';
 import addToSaleImg from '../assets/images/addSaleIcon.svg'
 
 import { ButtonLink } from "../components/ButtonLink";
+import { Search } from '../components/Search';
+import { Table } from '../components/Table';
 
 export function Combos() {
   const baseUrl = "http://localhost:3001/combos";
-
+  const history = useHistory()
   const [search, setSearch] = useState('');
-  
   const data = useData(baseUrl, 'name', search);
 
-  const notify = () =>
-    toast.success('Combo adicionado ao carrinho!', {
-      position: 'bottom-right',
-      autoClose: 1500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
+  const { updateSale } = useContext(SaleContext)
+  const { successNotify } = useNotify(history)
 
   const combosList = data.map((combo) => {
     return (
@@ -44,7 +37,10 @@ export function Combos() {
           <Link to={`/combos/delete/${combo.id}`} className="mr-2">
             <img src={trashImg} alt="ícone de lixeira" className="h-5" />
           </Link>
-          <button onClick={e => addToSale(combo.name, combo.price, notify)}>
+          <button onClick={e => {
+            updateSale(combo.name, combo.price)
+            successNotify('Produto adicionada ao carrinho') 
+          }}>
             <img src={addToSaleImg} alt="Ícone de carrinho com um sinal de adição" />
           </button>
           <ToastContainer />
@@ -55,31 +51,21 @@ export function Combos() {
 
   return (
     <main className=" main flex flex-col items-center bg-projectGray-25">
-      <div className="mt-6 border-2 border-red-700 bg-red-700 flex flex-row rounded-2xl overflow-hidden">
-        <input
-          id="search"
-          name="search"
-          value={search}
-          type="text"
-          className="rounded-2xl pl-2 outline-none w-52"
-          placeholder="Insira o Nome"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <img src={searchImg} alt="Ícone de lupa" className="p-1" />
-      </div>
-      <div className="mt-8 border border-gray-400 rounded-xl overflow-hidden shadow-md">
-        <table className="table-fixed">
-          <thead className="bg-gray-300">
-            <tr>
-              <th className="py-2 px-8 text-center">Nome</th>
-              <th className="py-2 px-8 text-center">Produtos</th>
-              <th className="py-2 px-8 text-center">Preço</th>
-              <th className="py-2 px-8 text-center">Ações</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white">{combosList}</tbody>
-        </table>
-      </div>
+      <Search 
+        placeholder="Insira o Nome"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)} />
+      <Table>
+        <thead className="bg-gray-300">
+          <tr>
+            <th className="py-2 px-8 text-center">Nome</th>
+            <th className="py-2 px-8 text-center">Produtos</th>
+            <th className="py-2 px-8 text-center">Preço</th>
+            <th className="py-2 px-8 text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody className="bg-white">{combosList}</tbody>
+      </Table>
       <ButtonLink to={`/combos/add`} color="green">
         Novo combo
       </ButtonLink>

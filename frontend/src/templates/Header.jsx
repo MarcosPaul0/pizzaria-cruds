@@ -1,12 +1,17 @@
-import SaleImg from '../assets/images/saleIcon.svg';
-import PizzaIgm from '../assets/images/Logo.svg';
+import { useContext } from 'react'
+import { SaleContext } from '../context/SaleContext'
 
 import { ButtonLink } from '../components/ButtonLink'
 
+import SaleImg from '../assets/images/saleIcon.svg';
+import PizzaIgm from '../assets/images/Logo.svg';
+
 export function Header(props) {
+  const saleContext = useContext(SaleContext)
+  
   const pathName = props.location.pathname.split('/')[1];
   let page = '';
-
+  
   if (pathName === '') {
     page = 'Início';
   } else if (pathName === 'employees') {
@@ -35,7 +40,9 @@ export function Header(props) {
       <ButtonLink to={'/sales/add'} className="justify-self-end mr-8">
         <div className="px-5 py-2 rounded-xl bg-red-800 mt-4 flex flex-row">
           <img src={SaleImg} alt="Carrinho de compras" className="h-8" />
-          <p></p>
+          <p className="text-white mt-3">
+            {saleContext.sale.products.length}
+          </p>
         </div>
       </ButtonLink>
     </header>

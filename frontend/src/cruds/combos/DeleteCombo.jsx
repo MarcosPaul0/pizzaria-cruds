@@ -2,6 +2,7 @@ import { useHistory } from "react-router-dom";
 import { deleteData } from "../../hooks/useCrud";
 import { useDataDelete } from "../../hooks/useDataDelete";
 
+import { Card } from '../../components/Card' 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 
@@ -35,41 +36,37 @@ export function DeleteCombo(props) {
     });
 
   return (
-    <main className="main bg-yellow-100 flex flex-col items-center">
-      <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
-        <div className="p-8">
-          <FormInput
-            id="name"
-            name="name"
-            type="text"
-            label="Nome"
-            value={combo.name}
-            disabled
-          />
-          <FormInput
-            id="products"
-            name="products"
-            type="text"
-            label="Produtos"
-            value={combo.products}
-            disabled
-          />
-          <FormInput
-            id="price"
-            name="price"
-            type="text"
-            label="Preço"
-            value={combo.price}
-            disabled
-          />
-          <div className="mt-4 flex justify-center">
-            <Button color="red" onClick={() => deleteData(baseUrl, notify)}>
-              Excluir
-            </Button>
-            <ToastContainer />
-          </div>
-        </div>
+    <Card>
+      <FormInput
+        id="name"
+        name="name"
+        type="text"
+        label="Nome"
+        value={combo.name}
+        disabled
+      />
+      <FormInput
+        id="products"
+        name="products"
+        type="text"
+        label="Produtos"
+        value={combo.products}
+        disabled
+      />
+      <FormInput
+        id="price"
+        name="price"
+        type="text"
+        label="Preço"
+        value={combo.price}
+        disabled
+      />
+      <div className="mt-4 flex justify-center">
+        <Button color="red" onClick={() => deleteData(baseUrl, notify)}>
+          Excluir
+        </Button>
+        <ToastContainer />
       </div>
-    </main>
+    </Card>
   );
 }

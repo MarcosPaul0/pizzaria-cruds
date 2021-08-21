@@ -1,28 +1,29 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { changeHandler, addData } from "../../hooks/useCrud";
 import { useData } from "../../hooks/useData";
-import { productsSale } from '../../hooks/useSale'
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { SaleContext } from '../../context/SaleContext'
+
 import { Button } from "../../components/Button";
+import { Card } from '../../components/Card';
 import { FormInput } from "../../components/FormInput";
 import { FormSelect } from "../../components/FormSelect";
-import { FormTextArea } from "../../components/FormTextArea";
 
 export function AddPayment() {
   const baseUrl = "http://localhost:3001/payments";
   const backUrl = "/payments";
   const history = useHistory();
+  const saleContext = useContext(SaleContext)
 
   const [payment, setPayment] = useState({
-    client: productsSale.client,
+    client: saleContext.sale.client,
     date: "",
     employee: "",
-    amount: productsSale.price,
-    receipt: `Recebi(emos) de ${productsSale.client}, a importância de ${productsSale.price} referente a compra de ${productsSale.products}`,
+    amount: saleContext.sale.price,
   });
 
   function clearHandler() {
@@ -31,7 +32,6 @@ export function AddPayment() {
       date: "",
       employee: "",
       amount: "",
-      receipt: "",
     });
   }
 
@@ -54,61 +54,49 @@ export function AddPayment() {
     });
 
   return (
-    <main className="main bg-projectGray-25 flex flex-col items-center">
-      <div className="w-96 rounded-lg shadow-lg bg-white mt-8 border border-gray-400">
-        <div className="p-8">
-          <FormInput
-            id="client"
-            name="client"
-            label="Cliente"
-            value={payment.client}
-            onChange={(e) => setPayment(changeHandler(e, payment))}
-          />
-          <FormInput
-            id="date"
-            name="date"
-            type="date"
-            label="Data"
-            value={payment.date}
-            onChange={(e) => setPayment(changeHandler(e, payment))}
-          />
-          <FormSelect
-            id="employee"
-            name="employee"
-            label="Funcionário"
-            defaultValue="none"
-            onChange={(e) => setPayment(changeHandler(e, payment))}
-          >
-            <option value="none">Selecione uma opção</option>
-            {employeeOptions}
-          </FormSelect>
-          <FormInput
-            id="amount"
-            name="amount"
-            type="number"
-            label="Montante"
-            value={payment.amount}
-            onChange={(e) => setPayment(changeHandler(e, payment))}
-          />
-          <FormTextArea
-            id="receipt"
-            name="receipt"
-            type="text"
-            label="Recibo"
-            value={payment.receipt}
-            onChange={(e) => setPayment(changeHandler(e, payment))}
-          />
-          <div className="mt-4 flex justify-center space-x-5">
-            <Button
-              color="green"
-              onClick={() => addData(baseUrl, payment, clearHandler, notify)}
-            >
-              Confirmar
-            </Button>
-            <ToastContainer />
-          </div>
-        </div>
+    <Card>
+      <FormInput
+        id="client"
+        name="client"
+        label="Cliente"
+        value={payment.client}
+        onChange={(e) => setPayment(changeHandler(e, payment))}
+      />
+      <FormInput
+        id="date"
+        name="date"
+        type="date"
+        label="Data"
+        value={payment.date}
+        onChange={(e) => setPayment(changeHandler(e, payment))}
+      />
+      <FormSelect
+        id="employee"
+        name="employee"
+        label="Funcionário"
+        defaultValue="none"
+        onChange={(e) => setPayment(changeHandler(e, payment))}
+      >
+        <option value="none">Selecione uma opção</option>
+        {employeeOptions}
+      </FormSelect>
+      <FormInput
+        id="amount"
+        name="amount"
+        type="number"
+        label="Montante"
+        value={payment.amount}
+        onChange={(e) => setPayment(changeHandler(e, payment))}
+      />
+      <div className="mt-4 flex justify-center space-x-5">
+        <Button
+          color="green"
+          onClick={() => addData(baseUrl, payment, clearHandler, notify)}
+        >
+          Confirmar
+        </Button>
+        <ToastContainer />
       </div>
-    </main>
+    </Card>
   );
 }
