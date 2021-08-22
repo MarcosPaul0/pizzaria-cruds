@@ -1,10 +1,8 @@
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { useData } from '../hooks/useData';
 import { SaleContext } from '../context/SaleContext'
-
 import { useNotify } from '../hooks/useNotify'
-import { ToastContainer } from "react-toastify";
 
 import trashImg from '../assets/images/trashIcon.svg';
 import pencilImg from '../assets/images/pencilIcon.svg';
@@ -12,17 +10,18 @@ import addToSaleImg from '../assets/images/addSaleIcon.svg'
 
 import { ButtonLink } from '../components/ButtonLink';
 import { Search } from '../components/Search';
+
 import { Table } from '../components/Table';
+import { ToastContainer } from "react-toastify";
 
 export function Pizzas() {
   const baseUrl = 'http://localhost:3001/pizzas';
-  const history = useHistory()
   const [search, setSearch] = useState('');
 
   const data = useData(baseUrl, 'name', search);
 
   const { updateSale } = useContext(SaleContext)
-  const { successNotify } = useNotify(history)
+  const { successNotify } = useNotify()
 
   const pizzasList = data.map((pizza) => {
     return (

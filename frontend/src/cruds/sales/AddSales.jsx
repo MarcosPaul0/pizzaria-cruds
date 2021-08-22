@@ -1,12 +1,11 @@
 import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { changeHandler, addData } from "../../hooks/useCrud";
 import { useData } from '../../hooks/useData'
+import { useNotify } from '../../hooks/useNotify'
 
 import { SaleContext } from '../../context/SaleContext'
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 import { Card } from '../../components/Card' 
 import { Button } from "../../components/Button";
@@ -17,7 +16,8 @@ import { FormSelect } from "../../components/FormSelect";
 export function AddSale() {
   const baseUrl = "http://localhost:3001/sales";
   const backUrl = "/sales";
-  const history = useHistory();
+  const { successNotify } = useNotify()
+  
   const saleContext = useContext(SaleContext)
 
   const [sale, setSale] = useState({
@@ -34,9 +34,8 @@ export function AddSale() {
       date: "",
       employee: "",
       products: "",
-      total: "",
+      total: 0,
     });
-
     saleContext.resetProducts()
   }
 
@@ -45,18 +44,6 @@ export function AddSale() {
   const employeeOptions = employees.map(employee =>
     <option key={employee.cpf} value={employee.name}>{employee.name}</option>
     )
-
-  const notify = () =>
-    toast.success("Venda registrada com sucesso!", {
-      position: "bottom-right",
-      onClose: () => history.push(backUrl),
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
 
   return (
     <Card>
@@ -105,8 +92,10 @@ export function AddSale() {
       <div className="mt-4 flex justify-center space-x-5">
         <Button
           color="green"
-          onClick={() => addData(baseUrl, sale, clearHandler, notify)}
-        >
+          onClick={() => {
+            successNotify("Venda registrada com sucesso!", backUrl)
+            addData(baseUrl, sale, clearHandler)
+          }}>
           Confirmar
         </Button>
         <OutlinedButton

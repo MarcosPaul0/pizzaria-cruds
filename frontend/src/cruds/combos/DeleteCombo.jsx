@@ -1,39 +1,26 @@
-import { useHistory } from "react-router-dom";
 import { deleteData } from "../../hooks/useCrud";
 import { useDataDelete } from "../../hooks/useDataDelete";
+import { useNotify } from '../../hooks/useNotify'
 
 import { Card } from '../../components/Card' 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 export function DeleteCombo(props) {
   const baseUrl = `http://localhost:3001/combos/${props.match.params.id}`;
   const backUrl = "/combos";
-  const history = useHistory();
+  const { errorNotify } = useNotify()
 
   const combo = useDataDelete(
     {
       name: "",
       products: "",
-      price: "",
+      price: 0,
     },
     baseUrl
   );
-
-  const notify = () =>
-    toast.error("Combo excluído!", {
-      position: "bottom-right",
-      onClose: () => history.push(backUrl),
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
 
   return (
     <Card>
@@ -62,7 +49,10 @@ export function DeleteCombo(props) {
         disabled
       />
       <div className="mt-4 flex justify-center">
-        <Button color="red" onClick={() => deleteData(baseUrl, notify)}>
+        <Button color="red" onClick={() => {
+          deleteData(baseUrl)
+          errorNotify("Combo excluído!", backUrl)
+        }}>
           Excluir
         </Button>
         <ToastContainer />

@@ -1,49 +1,37 @@
-import { useState } from 'react';
-import { changeHandler, addData } from '../../hooks/useCrud';
+import { useState } from "react";
+import { changeHandler, addData } from "../../hooks/useCrud";
+import { useNotify } from "../../hooks/useNotify";
 
-import { useHistory } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Card } from "../../components/Card";
+import { Button } from "../../components/Button";
+import { OutlinedButton } from "../../components/OutlinedButton";
+import { FormInput } from "../../components/FormInput";
+import { FormTextArea } from "../../components/FormTextArea";
+import { FormSelect } from "../../components/FormSelect";
 
-import { Card } from '../../components/Card' 
-import { Button } from '../../components/Button';
-import { OutlinedButton } from '../../components/OutlinedButton';
-import { FormInput } from '../../components/FormInput';
-import { FormTextArea } from '../../components/FormTextArea';
-import { FormSelect } from '../../components/FormSelect';
+import { ToastContainer } from "react-toastify";
 
 export function AddPizza() {
-  const baseUrl = 'http://localhost:3001/pizzas';
-  const backUrl = '/pizzas';
-  const history = useHistory();
+  const baseUrl = "http://localhost:3001/pizzas";
+  const backUrl = "/pizzas";
+
+  const { successNotify } = useNotify();
 
   const [pizza, setPizza] = useState({
-    name: '',
-    size: '',
-    ingredients: '',
-    price: '',
+    name: "",
+    size: "",
+    ingredients: "",
+    price: 0,
   });
 
   function clearHandler() {
     setPizza({
-      name: '',
-      size: '',
-      ingredients: '',
-      price: '',
+      name: "",
+      size: "",
+      ingredients: "",
+      price: 0,
     });
   }
-
-  const notify = () =>
-    toast.success('Pizza cadastrada com sucesso!', {
-      position: 'bottom-right',
-      onClose: () => history.push(backUrl),
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
 
   return (
     <Card>
@@ -88,10 +76,19 @@ export function AddPizza() {
         onChange={(e) => setPizza(changeHandler(e, pizza))}
       />
       <div className="mt-4 flex justify-center space-x-5">
-        <Button color="green" onClick={() => addData(baseUrl, pizza, clearHandler, notify)}>
+        <Button
+          color="green"
+          onClick={() => {
+            addData(baseUrl, pizza, clearHandler);
+            successNotify("Pizza cadastrada com sucesso!", backUrl);
+          }}
+        >
           Confirmar
         </Button>
-        <OutlinedButton color="projectRed-default" onClick={() => clearHandler()}>
+        <OutlinedButton
+          color="projectRed-default"
+          onClick={() => clearHandler()}
+        >
           Limpar
         </OutlinedButton>
         <ToastContainer />

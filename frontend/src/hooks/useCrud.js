@@ -6,22 +6,17 @@ function changeHandler(e, data) {
   return newData;
 }
 
-async function addData(baseUrl, data, clearHandler, notify) {
+async function addData(baseUrl, data, clearHandler) {
   await axios.post(baseUrl, data);
   clearHandler();
-
-  notify();
 }
 
-async function updateData(baseUrl, data, notify) {
+async function updateData(baseUrl, data) {
   await axios.put(baseUrl, data);
-
-  notify();
 }
 
-async function deleteData(baseUrl, notify) {
+async function deleteData(baseUrl) {
   await axios.delete(baseUrl);
-  notify();
 }
 
 export { changeHandler, addData, updateData, deleteData };

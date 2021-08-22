@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { changeHandler, addData } from '../../hooks/useCrud';
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useNotify } from '../../hooks/useNotify'
 
 import { Card } from '../../components/Card' 
 import { Button } from '../../components/Button';
 import { OutlinedButton } from '../../components/OutlinedButton';
 import { FormInput } from '../../components/FormInput';
 
+import { ToastContainer } from 'react-toastify';
+
 export function AddEmployee() {
   const baseUrl = 'http://localhost:3001/employees';
-  let history = useHistory();
+  const backUrl = '/employees'
+  const { successNotify } = useNotify()
 
   const [employee, setEmployee] = useState({
     name: '',
@@ -29,18 +29,6 @@ export function AddEmployee() {
       admission: '',
     });
   }
-
-  const notify = () =>
-    toast.success('Funcionário criado com sucesso!', {
-      position: 'bottom-right',
-      onClose: () => history.push('/employees'),
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
 
   return (
     <Card>
@@ -80,7 +68,10 @@ export function AddEmployee() {
         onChange={(e) => setEmployee(changeHandler(e, employee))}
       />
       <div className="mt-4 flex justify-center space-x-5">
-        <Button color="green" onClick={() => addData(baseUrl, employee, clearHandler, notify)}>
+        <Button color="green" onClick={() => {
+          successNotify('Funcionário criado com sucesso!', backUrl)
+          addData(baseUrl, employee, clearHandler)
+        }}>
           Confirmar
         </Button>
         <OutlinedButton color="projectRed-default" onClick={() => clearHandler()}>

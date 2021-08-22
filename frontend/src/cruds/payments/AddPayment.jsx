@@ -1,10 +1,7 @@
 import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { changeHandler, addData } from "../../hooks/useCrud";
 import { useData } from "../../hooks/useData";
-
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useNotify } from '../../hooks/useNotify'
 
 import { SaleContext } from '../../context/SaleContext'
 
@@ -13,10 +10,13 @@ import { Card } from '../../components/Card';
 import { FormInput } from "../../components/FormInput";
 import { FormSelect } from "../../components/FormSelect";
 
+import { ToastContainer } from "react-toastify";
+
 export function AddPayment() {
   const baseUrl = "http://localhost:3001/payments";
   const backUrl = "/payments";
-  const history = useHistory();
+
+  const { successNotify } = useNotify()
   const saleContext = useContext(SaleContext)
 
   const [payment, setPayment] = useState({
@@ -31,7 +31,7 @@ export function AddPayment() {
       client: "",
       date: "",
       employee: "",
-      amount: "",
+      amount: 0,
     });
   }
 
@@ -40,18 +40,6 @@ export function AddPayment() {
   const employeeOptions = employees.map(employee =>
     <option key={employee.cpf} value={employee.name}>{employee.name}</option>
     )
-
-  const notify = () =>
-    toast.success("Pagamento registrado com sucesso!", {
-      position: "bottom-right",
-      onClose: () => history.push(backUrl),
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
 
   return (
     <Card>
@@ -91,7 +79,10 @@ export function AddPayment() {
       <div className="mt-4 flex justify-center space-x-5">
         <Button
           color="green"
-          onClick={() => addData(baseUrl, payment, clearHandler, notify)}
+          onClick={() => {
+            addData(baseUrl, payment, clearHandler)
+            successNotify("Pagamento registrado com sucesso!", backUrl)
+          }}
         >
           Confirmar
         </Button>

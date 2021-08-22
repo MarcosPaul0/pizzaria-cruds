@@ -1,41 +1,28 @@
-import { useHistory } from 'react-router-dom';
 import { deleteData } from '../../hooks/useCrud';
 import { useDataDelete } from '../../hooks/useDataDelete';
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useNotify } from '../../hooks/useNotify'
 
 import { Card } from '../../components/Card' 
 import { OutlinedButton } from '../../components/OutlinedButton';
 import { FormInput } from '../../components/FormInput';
 import { FormTextArea } from '../../components/FormTextArea';
 
+import { ToastContainer } from 'react-toastify';
+
 export function DeletePizza(props) {
   const baseUrl = `http://localhost:3001/pizzas/${props.match.params.id}`;
   const backUrl = '/pizzas';
-  const history = useHistory();
+  const { errorNotify } = useNotify()
 
   const pizza = useDataDelete(
     {
       name: '',
       size: '',
       ingredients: '',
-      price: '',
+      price: 0,
     },
     baseUrl
   );
-
-  const notify = () =>
-    toast.error('Pizza excluída!', {
-      position: 'bottom-right',
-      onClose: () => history.push(backUrl),
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
 
   return (
     <Card>
@@ -59,7 +46,10 @@ export function DeletePizza(props) {
         disabled
       />
       <div className="mt-4 flex justify-center">
-        <OutlinedButton color="projectRed-default" onClick={() => deleteData(baseUrl, notify)}>
+        <OutlinedButton color="projectRed-default" onClick={() => {
+          errorNotify('Pizza excluída!', backUrl)
+          deleteData(baseUrl)
+        }}>
           Excluir
         </OutlinedButton>
         <ToastContainer />

@@ -6,6 +6,7 @@ import { SaleContext } from '../context/SaleContext'
 
 import pencilImg from "../assets/images/pencilIcon.svg";
 import okImg from '../assets/images/okIcon.svg'
+
 import { Search } from "../components/Search";
 import { Table } from "../components/Table";
 

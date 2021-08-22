@@ -1,38 +1,26 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { changeHandler, updateData } from "../../hooks/useCrud";
 import { useDataUpdate } from "../../hooks/useDataUpdate";
+import { useNotify } from '../../hooks/useNotify'
 
 import { Card } from '../../components/Card' 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 import { FormTextArea } from "../../components/FormTextArea";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export function UpdateAccompaniment(props) {
   const baseUrl = `http://localhost:3001/accompaniments/${props.match.params.id}`;
   const backUrl = "/accompaniments";
-  const history = useHistory();
+
+  const { successNotify } = useNotify()
 
   const [accompaniment, setAccompaniment] = useState({
     name: "",
     description: "",
-    price: "",
+    price: 0,
   });
-
-  const notify = () =>
-    toast.success("Acompanhamento alterado com sucesso!", {
-      position: "bottom-right",
-      onClose: () => history.push(backUrl),
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
 
   useDataUpdate(baseUrl, setAccompaniment);
 
@@ -65,9 +53,10 @@ export function UpdateAccompaniment(props) {
       <div className="mt-4 flex justify-center">
         <Button
           color="green"
-          onClick={() =>
-            updateData(baseUrl, accompaniment, notify)
-          }
+          onClick={() => {
+            updateData(baseUrl, accompaniment)
+            successNotify("Acompanhamento alterado com sucesso!", backUrl)
+          }}
         >
           Confirmar
         </Button>

@@ -1,10 +1,9 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useContext } from 'react'
 import { useData } from "../hooks/useData";
-import { SaleContext } from '../context/SaleContext'
-
 import { useNotify } from '../hooks/useNotify'
-import { ToastContainer } from "react-toastify";
+
+import { SaleContext } from '../context/SaleContext'
 
 import trashImg from "../assets/images/trashIcon.svg";
 import pencilImg from "../assets/images/pencilIcon.svg";
@@ -14,15 +13,16 @@ import { Search } from '../components/Search'
 import { ButtonLink } from "../components/ButtonLink";
 import { Table } from '../components/Table';
 
+import { ToastContainer } from "react-toastify";
+
 export function Accompaniments() {
   const baseUrl = "http://localhost:3001/accompaniments";
-  const history = useHistory()
   const [search, setSearch] = useState('');
 
   const data = useData(baseUrl, 'name', search);
 
   const { updateSale } = useContext(SaleContext)
-  const { successNotify } = useNotify(history)
+  const { successNotify } = useNotify()
   
   const accompanimentsList = data.map((accompaniment) => {
     return (

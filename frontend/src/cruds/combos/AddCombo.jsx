@@ -1,45 +1,33 @@
 import { useState } from "react";
-import { useHistory } from 'react-router-dom'
 import { changeHandler, addData } from "../../hooks/useCrud";
+import { useNotify } from '../../hooks/useNotify'
 
 import { Card } from '../../components/Card' 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 import { OutlinedButton } from '../../components/OutlinedButton';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export function AddCombo() {
   const baseUrl = "http://localhost:3001/combos";
   const backUrl = '/combos';
-  const history = useHistory();
+  
+  const { successNotify } = useNotify()
 
   const [combo, setCombo] = useState({
     products: "",
     description: "",
-    price: "",
+    price: 0,
   });
 
   function clearHandler() {
     setCombo({
       name: "",
       products: "",
-      price: "",
+      price: 0,
     });
   }
-
-  const notify = () =>
-    toast.success('Combo cadastrado com sucesso!', {
-      position: 'bottom-right',
-      onClose: () => history.push(backUrl),
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
 
   return (
     <Card>
@@ -70,7 +58,10 @@ export function AddCombo() {
       <div className="mt-4 flex justify-center space-x-5">
         <Button
           color="green"
-          onClick={() => addData(baseUrl, combo, clearHandler, notify)}
+          onClick={() => {
+            addData(baseUrl, combo, clearHandler)
+            successNotify('Combo cadastrado com sucesso!', backUrl)
+          }}
         >
           Confirmar
         </Button>

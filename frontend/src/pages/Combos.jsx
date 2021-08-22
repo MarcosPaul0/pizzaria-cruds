@@ -1,11 +1,9 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useContext } from 'react'
 import { useData } from "../hooks/useData";
+import { useNotify } from '../hooks/useNotify'
 
 import { SaleContext } from '../context/SaleContext'
-
-import { useNotify } from '../hooks/useNotify'
-import { ToastContainer } from "react-toastify";
 
 import trashImg from "../assets/images/trashIcon.svg";
 import pencilImg from "../assets/images/pencilIcon.svg";
@@ -15,14 +13,15 @@ import { ButtonLink } from "../components/ButtonLink";
 import { Search } from '../components/Search';
 import { Table } from '../components/Table';
 
+import { ToastContainer } from "react-toastify";
+
 export function Combos() {
   const baseUrl = "http://localhost:3001/combos";
-  const history = useHistory()
   const [search, setSearch] = useState('');
   const data = useData(baseUrl, 'name', search);
 
   const { updateSale } = useContext(SaleContext)
-  const { successNotify } = useNotify(history)
+  const { successNotify } = useNotify()
 
   const combosList = data.map((combo) => {
     return (

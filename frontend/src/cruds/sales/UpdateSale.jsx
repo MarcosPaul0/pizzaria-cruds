@@ -1,21 +1,20 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { changeHandler, updateData } from "../../hooks/useCrud";
 import { useDataUpdate } from "../../hooks/useDataUpdate";
 import { useData } from '../../hooks/useData'
-
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useNotify } from '../../hooks/useNotify'
 
 import { Card } from '../../components/Card' 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
+
 import { FormSelect } from "../../components/FormSelect";
+import { ToastContainer } from "react-toastify";
 
 export function UpdateSale(props) {
   const baseUrl = `http://localhost:3001/sales/${props.match.params.id}`;
   const backUrl = "/sales";
-  const history = useHistory();
+  const { successNotify } = useNotify()
 
   const [sale, setSale] = useState({
     client: "",
@@ -32,18 +31,6 @@ export function UpdateSale(props) {
   const employeeOptions = employees.map(employee =>
     <option key={employee.cpf} value={employee.name}>{employee.name}</option>
     )
-
-  const notify = () =>
-    toast.success("Venda alterada com sucesso!", {
-      position: "bottom-right",
-      onClose: () => history.push(backUrl),
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
 
   return (
     <Card>
@@ -92,7 +79,10 @@ export function UpdateSale(props) {
         onChange={(e) => setSale(changeHandler(e, sale))}
       />
       <div className="mt-4 flex justify-center space-x-5">
-        <Button color="green" onClick={() => updateData(baseUrl, sale, notify)}>
+        <Button color="green" onClick={() => {
+          updateData(baseUrl, sale)
+          successNotify("Venda alterada com sucesso!", backUrl)
+        }}>
           Confirmar
         </Button>
         <ToastContainer />
